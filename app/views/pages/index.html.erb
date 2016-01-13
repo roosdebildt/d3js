@@ -1,0 +1,70 @@
+<h1>Array data visualization</h1>
+<script>
+  var dataset = [90, 40, 20, 35, 60, 10, 40, 20, 35, 60,90];
+  var width = 1000;
+  var height = 400;
+  var barPadding = 2;
+
+  var svg1 = d3.select("body")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+  var rectangles = svg1.selectAll("rect")
+                      .data(dataset)
+                      .enter()
+                      .append("rect")
+
+  rectangles.attr("width", function(d) {return d * 2;})
+            .attr("height", function(d) {return d * 2;})
+            .attr("x", function(d, i) {return (i * (d * 1.5)) + 30;})
+            .attr("y", function(d) {return d * 3;})
+            .attr("fill", "blue");
+
+  var line = svg1.append("line")
+                .attr("x1", 10)
+                .attr("y1", 10)
+                .attr("x2", 500)
+                .attr("y2", 250)
+                .attr("stroke", "black")
+                .attr("stroke-width", 10);
+
+  var circles = svg1.selectAll("circle")
+                   .data(dataset)
+                   .enter()
+                   .append("circle");
+
+  circles.attr("cx", function(d, i) { return (i * 90) + 70})
+         .attr("cy", function(d) {return (d * 2) + 50;})
+         .attr("r", function(d) { return d; })
+         .attr("fill", "red")
+         .attr("stroke", "orange")
+         .attr("stroke-width", function(d) { return d/4; });
+
+  var svg2 = d3.select("body")
+               .append("svg")
+               .attr("width", width)
+               .attr("height", height);
+
+  var rectangles2 = svg2.selectAll("rect")
+                         .data(dataset)
+                         .enter()
+                         .append("rect");
+
+  rectangles2.attr("height", "20px")
+             .attr("width", function(d) { return d * 10; })
+             .attr("y", function(d, i) { return i * (height / dataset.length); })
+             .attr("fill", function(d) { return "#" +  (d + 123456) } );
+
+  var labels = svg2.selectAll("text")
+                  .data(dataset)
+                  .enter()
+                  .append("text")
+                  .text(function(d) { return d;} )
+                  .attr("y", function(d, i) { return i * (height / dataset.length) + 15; } )
+                  .attr("x", function(d) { return (d * 10) - 20; } )
+                  .attr("text-anchor", "start")
+                  .style("font-family", "Arial")
+                  .style("fill", "white");
+
+</script>
