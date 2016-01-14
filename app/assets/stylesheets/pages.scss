@@ -1,3 +1,26 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: Arial;
+    font-size: 11px;
+}
+
+svg text.label {
+  fill: red;
+  // transition: 0.5s ease-in-out;
+}
+
+// svg text.label:hover {
+//   // transform: scale(1.5, 1.5);
+// }
+
+// .attr("transition", "1s ease-in-out")
+// .attr("transform", "scale(1.5, 1.5)")
