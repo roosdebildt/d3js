@@ -1,0 +1,51 @@
+<h1>Harray harray!</h1>
+<script>
+
+var dataset;
+
+d3.csv("country.csv", function(error, data) {
+
+        if (error) {  //If error is not null, something went wrong.
+          console.log(error);  //Log the error.
+        } else {      //If no error, the file loaded correctly. Yay!
+          console.log(data);   //Log the data.
+
+      //Include other code to execute after successful file load here
+      dataset = data;
+      console.log(dataset.length);
+        }
+
+
+  var width = 1000;
+  var height = 400;
+  var barPadding = 2;
+
+  var svg2 = d3.select("body")
+               .append("svg")
+               .attr("width", width)
+               .attr("height", height);
+
+  console.log(dataset);
+
+  var rectangles2 = svg2.selectAll("rect")
+                         .data(dataset)
+                         .enter()
+                         .append("rect");
+
+  rectangles2.attr("height", "20px")
+             .attr("width", function(d) { return d.count * 50; })
+             .attr("y", function(d, i) { return i * (height / dataset.length); })
+             .attr("fill", function(d) { return "#" +  (d.count + 123456) } );
+
+  var labels = svg2.selectAll("text")
+                  .data(dataset)
+                  .enter()
+                  .append("text")
+                  .text(function(d) { return d.country;} )
+                  .attr("y", function(d, i) { return i * (height / dataset.length) + 15; } )
+                  .attr("x", function(d) { return (d.count * 50) - 20; } )
+                  .attr("text-anchor", "end")
+                  .style("font-family", "Arial")
+                  .style("fill", "white");
+});
+</script>
